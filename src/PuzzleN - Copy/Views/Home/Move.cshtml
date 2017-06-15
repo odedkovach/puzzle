@@ -1,0 +1,87 @@
+﻿
+@model int[,]
+
+@section scripts{
+<script>
+    window.onload = function () {
+        if (localStorage.get("hasCodeRunBefore") === null) {
+            // Your code here.
+
+            localStorage.setItem("hasCodeRunBefore", true);
+        }
+    }
+    //$(document).ready(function () {
+    //    $("Button2").click(function () {
+    //        alert(":button");
+    //        $.ajax({
+    //            url: '/home/move',
+    //            type: 'GET',
+    //            data: 'x=1&y=1&arr=1,2,3,4,5,6,7,8,9',
+    //            success: function (data) {
+    //                //called when successful
+    //                alert(data)
+    //            },
+    //            error: function (e) {
+    //                //called when there is an error
+    //                //console.log(e.message);
+    //            }
+    //        });
+    //    });
+    //});
+    function collectbuttonsvalue()
+    {
+       
+        inputs = document.getElementsByTagName('input');
+        for (index = 0; index < inputs.length; ++index) {
+            if (index == 0)
+                x = inputs[index].value;
+            else
+             x= x + ',' + inputs[index].value;
+        }
+        return x;
+    }
+    function movetile(id)
+    {
+              
+        $.ajax({
+            url: '/home/move',
+            type: 'GET',
+            data: 'position=' + id + '&arr='+ collectbuttonsvalue(),
+            success: function (data) {
+                //called when successful
+                $('#board').html(data);
+                            
+            },
+            error: function (e) {
+                //called when there is an error
+                //console.log(e.message);
+            }
+        });
+
+    }
+</script>}
+<form>
+    <div id="board">
+        <table>
+
+            @for (int row = 0; row <= Model.GetUpperBound(0); row++)
+            {
+                <tr>
+                    @for (int column = 0; column <= Model.GetUpperBound(1); column++)
+                {
+                        @if (@Model[column, row] == -1)
+                        {
+                            <td><input type="button" style="height:100px;width:100px;background-color:black;" id="@column.@row" onclick="movetile(this.id);" value="@Model[column, row]" />   </td>
+                        }
+                        else
+                        {
+                            <td><input type="button" style="height:100px;width:100px;" id="@column.@row" onclick="movetile(this.id);" value="@Model[column, row]" />   </td>
+
+
+                        }
+                    }
+                </tr>
+            }
+        </table>
+        </div>
+</form>
