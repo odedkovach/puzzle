@@ -1,0 +1,19 @@
+﻿{
+  "version": "1.0.0-*",
+  "dependencies": {
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "NUnit": "3.7.1",
+    "PuzzleN": "1.0.0-*"
+  },
+  "testRunner": "nunit",
+  "frameworks": {
+    "netcoreapp1.1": {
+      "imports": "dnxcore50",
+      "dependencies": {
+      }
+    }
+  },
+  "runtimes": {
+    "win7-x64": {}
+  }
+}

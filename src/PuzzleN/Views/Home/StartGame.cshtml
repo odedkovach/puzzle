@@ -3,24 +3,7 @@
 
 @section scripts{
 <script>
-    $(document).ready(function () {
-        $("Button2").click(function () {
-            alert(":button");
-            $.ajax({
-                url: '/home/move',
-                type: 'GET',
-                data: 'x=1&y=1&arr=1,2,3,4,5,6,7,8,9',
-                success: function (data) {
-                    //called when successful
-                    alert(data)
-                },
-                error: function (e) {
-                    //called when there is an error
-                    //console.log(e.message);
-                }
-            });
-        });
-    });
+   
     function collectbuttonsvalue()
     {
        
@@ -35,14 +18,17 @@
     }
     function movetile(id)
     {
-              
+      
         $.ajax({
             url: '/home/move',
             type: 'GET',
             data: 'position=' + id + '&arr=' + collectbuttonsvalue(),
+            error: function (request, error) {
+                alert(" Can't do because: " + error);
+            },
             success: function (data) {
                 //called when successful
-                
+                alert(data);
                 $('#board').html(data);
             },
             error: function (e) {

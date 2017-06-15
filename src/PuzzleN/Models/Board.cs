@@ -8,7 +8,7 @@ namespace PuzzleN.Model
     public class Board
     {
       
-        int BoardSize;
+        public int BoardSize;
         public int[,] Matrix;
 
         public int[,] InitBoard(int boardsize , bool firsttime)

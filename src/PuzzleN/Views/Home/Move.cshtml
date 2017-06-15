@@ -1,65 +1,7 @@
 ﻿
 @model int[,]
 
-@section scripts{
-<script>
-    window.onload = function () {
-        if (localStorage.get("hasCodeRunBefore") === null) {
-            // Your code here.
 
-            localStorage.setItem("hasCodeRunBefore", true);
-        }
-    }
-    //$(document).ready(function () {
-    //    $("Button2").click(function () {
-    //        alert(":button");
-    //        $.ajax({
-    //            url: '/home/move',
-    //            type: 'GET',
-    //            data: 'x=1&y=1&arr=1,2,3,4,5,6,7,8,9',
-    //            success: function (data) {
-    //                //called when successful
-    //                alert(data)
-    //            },
-    //            error: function (e) {
-    //                //called when there is an error
-    //                //console.log(e.message);
-    //            }
-    //        });
-    //    });
-    //});
-    function collectbuttonsvalue()
-    {
-       
-        inputs = document.getElementsByTagName('input');
-        for (index = 0; index < inputs.length; ++index) {
-            if (index == 0)
-                x = inputs[index].value;
-            else
-             x= x + ',' + inputs[index].value;
-        }
-        return x;
-    }
-    function movetile(id)
-    {
-              
-        $.ajax({
-            url: '/home/move',
-            type: 'GET',
-            data: 'position=' + id + '&arr='+ collectbuttonsvalue(),
-            success: function (data) {
-                //called when successful
-                $('#board').html(data);
-                            
-            },
-            error: function (e) {
-                //called when there is an error
-                //console.log(e.message);
-            }
-        });
-
-    }
-</script>}
 <form>
     <div id="board">
         <table>
