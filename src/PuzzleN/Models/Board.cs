@@ -15,7 +15,7 @@ namespace PuzzleN.Model
         {
             BoardSize = boardsize;
             Matrix = new int[boardsize, boardsize];
-            if (firsttime)
+            if (firsttime) // in the next calls from the Ajax we dont need to fill the board again.
             { 
              while (isSolvable(InternalInitBoard(boardsize)))
                  return Matrix;

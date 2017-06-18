@@ -14,7 +14,7 @@ namespace PuzzleN.Controllers
         public IActionResult StartGame(int size)
         {
             Board b = new Board();
-            var metrix = b.InitBoard(size,true);
+            var metrix = b.InitBoard(size,true); // true- first time , Fasle -  fom the Ajax call
                   
             return View(metrix);
         }
@@ -22,18 +22,11 @@ namespace PuzzleN.Controllers
         public IActionResult Move(string position, string arr, int size)
         {
             Board b = new Board();
-            if (position==null)
-            {
-               
-                var metrix = b.InitBoard(size,true);
-            }
-            else
-            { 
+           
             int[] pos = position.Split('.').Select(int.Parse).ToArray(); //x,y positions from the buttons
-            int[] nums = arr.Split(',').Select(int.Parse).ToArray();
+            int[] nums = arr.Split(',').Select(int.Parse).ToArray(); // array from the client buttons
 
-                // Board b = new Board();
-                 
+                           
                 var m = b.InitBoard(Convert.ToInt32(Math.Sqrt(nums.Length)),false);
                 b.Matrix = b.FillMatrixFromArray(m, nums);
 
@@ -42,7 +35,7 @@ namespace PuzzleN.Controllers
                     return Content("You Win :)");
 
             var cr = new JsonResult(b.Matrix);
-            }
+           
             return View(b.Matrix);
             
         }
