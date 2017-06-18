@@ -30,7 +30,7 @@ namespace TestPuzzlen
 
             //Assert
 
-            Assert.IsTrue(1 == 1);
+          
             // Assert.(list.Count, list.Distinct().Count);
         }
     }

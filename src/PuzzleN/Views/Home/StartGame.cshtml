@@ -3,10 +3,10 @@
 
 @section scripts{
 <script>
-   
+
     function collectbuttonsvalue()
     {
-       
+
         inputs = document.getElementsByTagName('input');
         for (index = 0; index < inputs.length; ++index) {
             if (index == 0)
@@ -14,13 +14,41 @@
             else
              x= x + ',' + inputs[index].value;
         }
+       // alert(x);
         return x;
+    }
+
+    function displayboard(table,size) {
+        ht0 = "<Form><table>";
+        ht2 = ''
+        ht1 = '';
+        for (x = 0; x <= size-1 ; x++) {
+         
+            ht1 = ht1 + "<tr>";
+            for (y = 0; y <= size-1 ; y++) {
+                if (table[y][x] == -1)
+                    {
+                    ht1 = ht1 + "<td><input type='button' style='height:100px;width:100px;background-color:black;' id='" + x + "." + y + "' onclick='movetile(this.id)' value='" + table[y][x] + "' /></td>";
+                }
+                else
+                {
+
+                    ht1 = ht1 + "<td><input type='button' style='height:100px;width:100px;' id='" + y + "." + x + "' onclick='movetile(this.id)' value='" + table[y][x] + "' /></td>";
+
+                }
+                }
+            ht1 = ht1 + "</tr>";
+         //   ht2 = ht2 +  "<tr>" + ht1 + "</tr>";
+
+        }
+        ht3 = "</table></Form>";
+        return ht1;
     }
     function movetile(id)
     {
-      
+
         $.ajax({
-            url: '/home/move',
+            url: '/home/move2',
             type: 'GET',
             data: 'position=' + id + '&arr=' + collectbuttonsvalue(),
             error: function (request, error) {
@@ -28,8 +56,18 @@
             },
             success: function (data) {
                 //called when successful
-                alert(data);
-                $('#board').html(data);
+              //  alert(displayboard(data));
+                // $('#board').html(data);
+                if (data == "Well done")
+                {
+                    $('#board').html(data)
+                
+                }
+                else
+                {
+                //alert(data.length);
+                $('#board').html(displayboard(data, data.length));
+               }
             },
             error: function (e) {
                 //called when there is an error

@@ -50,13 +50,7 @@ namespace PuzzleN.Controllers
         public IActionResult Move2(string position, string arr, int size)
         {
             Board b = new Board();
-            if (position == null)
-            {
-
-                var metrix = b.InitBoard(size, true);
-            }
-            else
-            {
+           
                 int[] pos = position.Split('.').Select(int.Parse).ToArray(); //x,y positions from the buttons
                 int[] nums = arr.Split(',').Select(int.Parse).ToArray();
 
@@ -67,11 +61,13 @@ namespace PuzzleN.Controllers
 
                 var newmetrix = b.MoveTile(pos[0], pos[1]);
                 if (b.CheckSolved(b.Matrix))
-                    return Content("You Win :)");
+                    return Content("well done");
 
                 var cr = new JsonResult(b.Matrix);
-            }
-            return View(b.Matrix);
+                return cr;
+            
+            //  return View(b.Matrix);
+           
 
         }
     }
